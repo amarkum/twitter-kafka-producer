@@ -1,6 +1,7 @@
 .idea/*
+.idea/
 target/
 *.txt
 *.iml
 *.iml/
-interview-brushups.iml
+
