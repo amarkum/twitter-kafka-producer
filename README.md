@@ -1,2 +1,2 @@
 # twitter-kafka-producer
-It produces tweets to Kafka Topic, using the twitter streaming API
+twitter-kafka-producer produces stream of tweets into a given topic, based on user's hastag input.
