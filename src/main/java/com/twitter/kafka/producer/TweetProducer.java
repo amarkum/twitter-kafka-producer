@@ -72,23 +72,27 @@ public class TweetProducer {
             }
 
             if (msg != null) {
-                String tweetId = new JSONObject(msg).getString("id");
-                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
-                System.out.println(new JSONObject(msg).getString("text")
-                        .replace("\n", " ")
-                        .replace("\t", " "));
-                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++\n");
+                try {
+                    String tweetId = new JSONObject(msg).getString("id");
+                    System.out.println("+-");
+                    System.out.println(new JSONObject(msg).getString("text")
+                            .replace("\n", " ")
+                            .replace("\t", " "));
+                    System.out.println("+-");
 
-                producer.send(new ProducerRecord<>(topicName, tweetId, msg), (recordMetadata, e) -> {
-                    if (e != null) {
-                        System.out.println("Unable to Produce the Message" + e);
-                    } else {
+                    producer.send(new ProducerRecord<>(topicName, tweetId, msg), (recordMetadata, e) -> {
+                        if (e != null) {
+                            System.out.println("Unable to Produce the Message" + e);
+                        } else {
                         System.out.println("Topic :" + recordMetadata.topic());
                         System.out.println("Partition :" + recordMetadata.partition());
                         System.out.println("Offset :" + recordMetadata.offset());
                         System.out.println("TimeStamp :" + recordMetadata.timestamp());
-                    }
-                });
+                        }
+                    });
+                }
+                catch (Exception e){
+                }
             }
         }
         System.out.println("End of application");
